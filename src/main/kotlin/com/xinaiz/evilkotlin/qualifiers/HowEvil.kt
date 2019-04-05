@@ -3,6 +3,11 @@ package com.xinaiz.evilkotlin.qualifiers
 enum class HowEvil(val value: Int) {
 
   /**
+   * Actually not evil.
+   */
+  WHY_IS_THIS_IN_THIS_LIBRARY(0),
+
+  /**
    * All kinds of local discontinuity, 1-liner haxs.
    * Generally stuff that can be easily fixed.
    * For example:
