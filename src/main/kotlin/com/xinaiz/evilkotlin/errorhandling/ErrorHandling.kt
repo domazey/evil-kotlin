@@ -1,4 +1,4 @@
-package com.xinaiz.evilkotlin.infoloss
+package com.xinaiz.evilkotlin.errorhandling
 
 import com.xinaiz.evilkotlin.qualifiers.Evilness
 import com.xinaiz.evilkotlin.qualifiers.HowEvil

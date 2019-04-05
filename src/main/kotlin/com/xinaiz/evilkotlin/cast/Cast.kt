@@ -1,4 +1,4 @@
-package com.xinaiz.evilkotlin.casts
+package com.xinaiz.evilkotlin.cast
 
 import com.xinaiz.evilkotlin.qualifiers.Evilness
 import com.xinaiz.evilkotlin.qualifiers.HowEvil
