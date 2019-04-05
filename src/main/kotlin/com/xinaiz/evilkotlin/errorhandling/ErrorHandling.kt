@@ -30,7 +30,7 @@ inline fun <reified T> tryOrDefault(block: () -> T, default: T) = tryOrDefault(b
  * Usage: { mightThrow() } default 42
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline infix fun <reified T> (()->T).default(default: T) = tryOrDefault(this, default)
+inline infix fun <reified T> (() -> T).default(default: T) = tryOrDefault(this, default)
 
 /**
  * Try to execute block
@@ -38,4 +38,10 @@ inline infix fun <reified T> (()->T).default(default: T) = tryOrDefault(this, de
  * Usage: { mightThrow() } default 42
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline infix fun <reified T> (()->T).default(default: () -> T) = tryOrDefault(this, default)
+inline infix fun <reified T> (() -> T).default(default: () -> T) = tryOrDefault(this, default)
+
+/**
+ * Try to execute block. You don't care what happens.
+ */
+@Evilness(HowEvil.VERY_EVIL)
+inline fun consumeExceptions(block: () -> Unit) = tryOrDefault(block) { Unit }
