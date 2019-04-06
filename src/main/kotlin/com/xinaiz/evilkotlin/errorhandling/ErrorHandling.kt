@@ -11,10 +11,20 @@ import com.xinaiz.evilkotlin.qualifiers.HowEvil
  * 2. Dignity
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline fun <reified T> tryOrDefault(block: () -> T, default: () -> T) = try {
+fun <T> tryOrDefault(block: () -> T, default: () -> T) = try {
   block()
 } catch (ex: Throwable) {
   default()
+}
+
+/**
+ * Nullable default version of [tryOrDefault]
+ */
+@Evilness(HowEvil.VERY_EVIL)
+fun <T> tryOrDefaultNullable(block: () -> T, default: T?): T? = try {
+  block()
+} catch (ex: Throwable) {
+  default
 }
 
 /**
@@ -22,26 +32,32 @@ inline fun <reified T> tryOrDefault(block: () -> T, default: () -> T) = try {
  * If something bad happens ¯\_(ツ)_/¯ return a default value.
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline fun <reified T> tryOrDefault(block: () -> T, default: T) = tryOrDefault(block) { default }
+fun <T> tryOrDefault(block: () -> T, default: T) = tryOrDefault(block) { default }
 
 /**
  * Try to execute block
  * Even worse than tryOrDefault. Accepts default value
- * Usage: { mightThrow() } default 42
+ * Usage: { mightThrow() } onError 42
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline infix fun <reified T> (() -> T).default(default: T) = tryOrDefault(this, default)
+infix fun <T> (() -> T).onError(default: T) = tryOrDefault(this, default)
 
 /**
  * Try to execute block
  * Even worse than tryOrDefault. Accepts default expression
- * Usage: { mightThrow() } default 42
+ * Usage: { mightThrow() } onError { 42 }
  */
 @Evilness(HowEvil.VERY_EVIL)
-inline infix fun <reified T> (() -> T).default(default: () -> T) = tryOrDefault(this, default)
+infix fun <T> (() -> T).onError(default: () -> T) = tryOrDefault(this, default)
 
 /**
  * Try to execute block. You don't care what happens.
  */
-@Evilness(HowEvil.VERY_EVIL)
-inline fun consumeExceptions(block: () -> Unit) = tryOrDefault(block) { Unit }
+@Evilness(HowEvil.SUPER_EVIL)
+fun consumeExceptions(block: () -> Unit) = tryOrDefault(block) { Unit }
+
+/**
+ * Try to execute block or return null
+ */
+@Evilness(HowEvil.SUPER_EVIL)
+fun tryOrNull(block: () -> Unit) = tryOrDefaultNullable(block, null)
