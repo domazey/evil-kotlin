@@ -60,4 +60,4 @@ fun consumeExceptions(block: () -> Unit) = tryOrDefault(block) { Unit }
  * Try to execute block or return null
  */
 @Evilness(HowEvil.SUPER_EVIL)
-fun tryOrNull(block: () -> Unit) = tryOrDefaultNullable(block, null)
+fun <T> tryOrNull(block: () -> T) = tryOrDefaultNullable(block, null)
